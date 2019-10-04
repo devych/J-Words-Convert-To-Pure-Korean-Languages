@@ -1,0 +1,14 @@
+{
+  "name": "JapWordConvertToPureKorLangs",
+  "version": "0.0.1",
+  "description": "일본 외래어를 순우리말로 변환해줍니다.",
+  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 2
+}
