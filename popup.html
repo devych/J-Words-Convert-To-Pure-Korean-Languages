@@ -4,12 +4,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>이시국에 일본외래어를 쓴다고?</title>
+    <style>
+      button {
+        position: relative;
+        height: 30px;
+        width: 30px;
+        outline: none;
+        margin: 10px;
+      }
+      h3 {
+        position: relative;
+        height: 30px;
+        width: 300px;
+        outline: none;
+        margin: 10px;
+      }
+    </style>
   </head>
   <body>
-    <div>
-      <h1>일본외래어를 순우리말로 변환합니다</h1>
-      <div id="buttonDiv"></div>
-    </div>
+    <script type="text/javascript" src="data/word.js">
+      console.log(data/word.js)
+    </script>
+    <main id="mainBlock">
+      <div>이시국에 일본외래어를?</div>
+      <section>
+        <span class="toggle">
+          <input type="checkbox" class="pure-toggle-checkbox" hidden />
+          <label class="pure-toggle flip" for="pure-toggle-">
+            <div class="fontawesome-remove">OFF</div>
+            <div class="fontawesome-ok">ON</div>
+          </label>
+        </span>
+        <header class="color-header">C72E04</header>
+        <textarea
+          class="highlight-words"
+          placeholder="(separated by a space)"
+        ></textarea>
+      </section>
+    </main>
     <script src="popup.js"></script>
   </body>
 </html>
