@@ -4,7 +4,6 @@
   "description": "일본 외래어를 순우리말로 변환해줍니다.",
   "permissions": [
     "tabs",
-    "active_tabs",
     "http://*/*",
     "https://*/*",
     "storage"
@@ -16,7 +15,7 @@
   "content_scripts": [
     {
       "all_frames": true,
-      "js": ["content-action.js"],
+      "js": ["dist/content.js"],
       "run_at": "document_idle",
       "matches": ["<all_urls>", "http://*/*", "https://*/*", "file://*/*"]
     }

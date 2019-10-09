@@ -1,0 +1,26 @@
+{
+  "name": "j-words-convert-to-pure-korean-languages",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devych/J-Words-Convert-To-Pure-Korean-Languages.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devych/J-Words-Convert-To-Pure-Korean-Languages/issues"
+  },
+  "homepage": "https://github.com/devych/J-Words-Convert-To-Pure-Korean-Languages#readme",
+  "dependencies": {
+    "@babel/core": "^7.6.3",
+    "@babel/preset-env": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9"
+  }
+}
