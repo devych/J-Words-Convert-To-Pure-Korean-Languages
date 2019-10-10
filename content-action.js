@@ -81,12 +81,6 @@
       // reset scroll position, window.find() will select the last word...
       window.scrollTo(0, 0);
     } else {
-      // console.log(
-      //   "[highlightWordAcrossNode] nothing found",
-      //   word,
-      //   bgColorCode,
-      //   document.title
-      // );
     }
 
     // highlight all ranges
@@ -127,11 +121,7 @@
     var highlightWordFunction;
     if (window.find) {
       highlightWordFunction = highlightWordAcrossNode;
-      // alternative: https://github.com/timdown/rangy/wiki/Highlighter-Module
     } else {
-      // console.log(
-      //   "window.find() function not exists, only textnode will be searched"
-      // );
       highlightWordFunction = highlightWordInTextNodeOnly;
     }
     // for each group, highlight all its words
@@ -144,34 +134,12 @@
     });
   };
 
-  // get words from storage
-  // chrome.storage.sync.get("wordGroupsDict", function(wordGroupsDict) {
-  //   if (!wordGroupsDict.wordGroupsDict) return;
-  //   else wordGroupsDict = wordGroupsDict.wordGroupsDict;
-
-  //   // highlightAllWords(wordGroupsDict);
-  //   // body may not loaded... hard-code some delay
-  //   setTimeout(highlightAllWords, 500, wordGroupsDict);
-
-  //   // may use observer to due with it
-  //   // var observer = new MutationObserver(function(mutations) {
-  //   // 	mutations.forEach(function(mutation) {
-  //   // 		console.log(mutation);
-  //   // 	});
-  //   // })
-  //   // var minConfig = { attributes: true, childList: true, characterData: true };
-  //   // minConfig.subtree = true;
-  //   // observer.observe(document.body, minConfig);
-  // });
-
   // on word list change
   chrome.runtime.onMessage.addListener(function(
     messageBody,
     sender,
     sendResponse
   ) {
-    // console.log(sender.tab ? "from a content script:" + sender.tab.url : "from the extension");
-
     // remove all highlight first
     [].slice
       .call(document.getElementsByClassName("chrome-extension-highlight"))
