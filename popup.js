@@ -2,9 +2,7 @@
 (function() {
   "use strict";
 
-  /*|================================================================|*/
-  /*|                          UI creation                           |*/
-  /*|================================================================|*/
+  //UI
   var initSectionByBgColorFromTemplate = function(
     sectionNodeTemplate,
     bgColorCode,
@@ -62,9 +60,7 @@
   var mainBlock = document.getElementById("mainBlock");
   var sessionTemplate = mainBlock.getElementsByTagName("section")[0];
 
-  /*|================================================================|*/
-  /*|                 load UI data and event binding                 |*/
-  /*|================================================================|*/
+  //load UI data and event binding
   var getDefaultWordGroup = function(groupName) {
     return {
       groupName: groupName,
@@ -83,6 +79,7 @@
   var saveAndSendMsg = function(wordGroupsDict) {
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
       var messageBody = wordGroupsDict;
+      console.log(wordGroupsDict);
       chrome.tabs.sendMessage(tabs[0].id, messageBody, function(response) {
         // console.log(response.content);
       });
@@ -115,18 +112,14 @@
     };
   };
 
-  /*|================================================================|*/
-  /*|                    load extension settings                     |*/
-  /*|================================================================|*/
+  //load extension settings
   chrome.storage.sync.get("wordGroupsDict", function(wordGroupsDict) {
     // I just dont know how chrome.storage.sync works...
     // + nothing inside, return {}
     // + find the key, return {key: value}
     wordGroupsDict = wordGroupsDict.wordGroupsDict || wordGroupsDict;
 
-    /*|================================================================|*/
-    /*|                   popup UI and event binding                   |*/
-    /*|================================================================|*/
+    //popup UI and event binding
     // use default for 1st time
     var colorGroups = Object.keys(wordGroupsDict);
     if (colorGroups.length === 0) {
