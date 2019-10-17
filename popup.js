@@ -2,9 +2,7 @@
 (function() {
   "use strict";
 
-  /*|================================================================|*/
-  /*|                          UI creation                           |*/
-  /*|================================================================|*/
+  //UI
   var initSectionByBgColorFromTemplate = function(
     sectionNodeTemplate,
     bgColorCode,
@@ -16,7 +14,6 @@
       "pure-toggle-checkbox",
       "pure-toggle",
       "color-header",
-      // "remove-group-button",
       "highlight-words"
     ];
 
@@ -46,16 +43,6 @@
     header.textContent = bgColorCode;
     handlingIndex++;
 
-    // var removeButton = sectionNode.getElementsByClassName(
-    //   classNames[handlingIndex]
-    // )[0];
-    // removeButton.dataset.bgColorCode = bgColorCode;
-    // removeButton.addEventListener(
-    //   "click",
-    //   removeGroupHandlerFactory(wordGroupsDict, sectionNode)
-    // );
-    // handlingIndex++;
-
     var textarea = sectionNode.getElementsByClassName(
       classNames[handlingIndex]
     )[0];
@@ -72,17 +59,14 @@
 
   var mainBlock = document.getElementById("mainBlock");
   var sessionTemplate = mainBlock.getElementsByTagName("section")[0];
-  // var newGroupForm = document.getElementById("new-group-form");
-  // var colorInputBox = document.getElementById("new-group-color");
 
-  /*|================================================================|*/
-  /*|                 load UI data and event binding                 |*/
-  /*|================================================================|*/
+  //load UI data and event binding
   var getDefaultWordGroup = function(groupName) {
     return {
       groupName: groupName,
       isOn: false,
-      words: wordArr
+      words: Object.keys(wordObj),
+      wordsDescription: wordObj
     };
   };
   var createNewGroupInDict = function(wordGroupsDict, groupName) {
@@ -94,17 +78,10 @@
     }
   };
   var saveAndSendMsg = function(wordGroupsDict) {
-    // chrome.storage.sync.set(
-    //   {
-    //     wordGroupsDict: wordGroupsDict
-    //   },
-    //   function() {
-    //     console.log("wordGroupsDict saved");
-    //   }
-    // );
-
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
       var messageBody = wordGroupsDict;
+
+      console.log(wordGroupsDict);
       chrome.tabs.sendMessage(tabs[0].id, messageBody, function(response) {
         // console.log(response.content);
       });
@@ -137,18 +114,14 @@
     };
   };
 
-  /*|================================================================|*/
-  /*|                    load extension settings                     |*/
-  /*|================================================================|*/
+  //load extension settings
   chrome.storage.sync.get("wordGroupsDict", function(wordGroupsDict) {
     // I just dont know how chrome.storage.sync works...
     // + nothing inside, return {}
     // + find the key, return {key: value}
     wordGroupsDict = wordGroupsDict.wordGroupsDict || wordGroupsDict;
 
-    /*|================================================================|*/
-    /*|                   popup UI and event binding                   |*/
-    /*|================================================================|*/
+    //popup UI and event binding
     // use default for 1st time
     var colorGroups = Object.keys(wordGroupsDict);
     if (colorGroups.length === 0) {
@@ -159,7 +132,6 @@
     }
 
     // remove template and append initialized sections
-    // console.log(mainBlock, sessionTemplate);
 
     mainBlock.removeChild(sessionTemplate);
     colorGroups.forEach(function(bgc) {
@@ -167,31 +139,5 @@
         initSectionByBgColorFromTemplate(sessionTemplate, bgc, wordGroupsDict)
       );
     });
-    // newGroupForm.addEventListener("submit", function(event) {
-    //   event.preventDefault();
-    //   if (
-    //     colorInputBox.value &&
-    //     colorInputBox.value.length > 0 &&
-    //     colorInputBox.checkValidity()
-    //   ) {
-    //     console.log("submit OK");
-    //     createNewGroupInDict(wordGroupsDict, colorInputBox.value);
-    //     mainBlock.appendChild(
-    //       initSectionByBgColorFromTemplate(
-    //         sessionTemplate,
-    //         colorInputBox.value,
-    //         wordGroupsDict
-    //       )
-    //     );
-    //   }
-    //   console.log("submit");
-    // });
-    // colorInputBox.addEventListener("keyup", function(event) {
-    //   if (event.target.checkValidity()) {
-    //     event.target.style.backgroundColor = "#".concat(event.target.value);
-    //   } else {
-    //     event.target.style.backgroundColor = "white";
-    //   }
-    // });
   });
 })();

@@ -11,7 +11,11 @@
   })();
 
   // highlight word in DOM (textnode only)
-  var highlightWordInTextNodeOnly = function(word, bgColorCode) {
+  var highlightWordInTextNodeOnly = function(
+    word,
+    bgColorCode,
+    wordsDescription
+  ) {
     // skip empty word
     if (word == null || word.length === 0) return;
 
@@ -62,12 +66,12 @@
 
       // highlight all ranges
       rangeList.forEach(function(r) {
-        highlightRange(r, bgColorCode);
+        highlightRange(r, bgColorCode, wordsDescription);
       });
     });
   };
   // highlight word in DOM (keyword can be across multi tag)
-  var highlightWordAcrossNode = function(word, bgColorCode) {
+  var highlightWordAcrossNode = function(word, bgColorCode, wordsDescription) {
     // reset cursor
     window.getSelection().removeAllRanges();
 
@@ -81,21 +85,15 @@
       // reset scroll position, window.find() will select the last word...
       window.scrollTo(0, 0);
     } else {
-      // console.log(
-      //   "[highlightWordAcrossNode] nothing found",
-      //   word,
-      //   bgColorCode,
-      //   document.title
-      // );
     }
 
     // highlight all ranges
     rangeList.forEach(function(r) {
-      highlightRange(r, bgColorCode);
+      highlightRange(r, bgColorCode, wordsDescription);
     });
   };
   // highlight the keyword by surround it by `i`
-  var highlightRange = function(range, bgColorCode) {
+  var highlightRange = function(range, bgColorCode, wordsDescription) {
     // create wrapping i
     var iNode = document.createElement("i");
     var selectorName = (iNode.className = "chrome-extension-highlight-".concat(
@@ -117,9 +115,9 @@
       );
       ruleExistenceDict[bgColorCode] = true;
     }
-
     // range.surroundContents(iNode) will throw exception if word across multi tag
     iNode.appendChild(range.extractContents());
+    iNode.title = `${iNode.textContent}${wordsDescription[iNode.textContent]}`;
     range.insertNode(iNode);
   };
   // highlight all keywords by its colour
@@ -127,42 +125,22 @@
     var highlightWordFunction;
     if (window.find) {
       highlightWordFunction = highlightWordAcrossNode;
-      // alternative: https://github.com/timdown/rangy/wiki/Highlighter-Module
     } else {
-      // console.log(
-      //   "window.find() function not exists, only textnode will be searched"
-      // );
       highlightWordFunction = highlightWordInTextNodeOnly;
     }
     // for each group, highlight all its words
     Object.keys(wordGroupsDict).forEach(function(groupName) {
       if (wordGroupsDict[groupName].isOn) {
         wordGroupsDict[groupName].words.forEach(function(word) {
-          highlightWordFunction(word, groupName);
+          highlightWordFunction(
+            word,
+            groupName,
+            wordGroupsDict[groupName].wordsDescription
+          );
         });
       }
     });
   };
-
-  // get words from storage
-  // chrome.storage.sync.get("wordGroupsDict", function(wordGroupsDict) {
-  //   if (!wordGroupsDict.wordGroupsDict) return;
-  //   else wordGroupsDict = wordGroupsDict.wordGroupsDict;
-
-  //   // highlightAllWords(wordGroupsDict);
-  //   // body may not loaded... hard-code some delay
-  //   setTimeout(highlightAllWords, 500, wordGroupsDict);
-
-  //   // may use observer to due with it
-  //   // var observer = new MutationObserver(function(mutations) {
-  //   // 	mutations.forEach(function(mutation) {
-  //   // 		console.log(mutation);
-  //   // 	});
-  //   // })
-  //   // var minConfig = { attributes: true, childList: true, characterData: true };
-  //   // minConfig.subtree = true;
-  //   // observer.observe(document.body, minConfig);
-  // });
 
   // on word list change
   chrome.runtime.onMessage.addListener(function(
@@ -170,8 +148,6 @@
     sender,
     sendResponse
   ) {
-    // console.log(sender.tab ? "from a content script:" + sender.tab.url : "from the extension");
-
     // remove all highlight first
     [].slice
       .call(document.getElementsByClassName("chrome-extension-highlight"))
