@@ -65,7 +65,8 @@
     return {
       groupName: groupName,
       isOn: false,
-      words: wordArr
+      words: Object.keys(wordObj),
+      wordsDescription: wordObj
     };
   };
   var createNewGroupInDict = function(wordGroupsDict, groupName) {
@@ -79,6 +80,7 @@
   var saveAndSendMsg = function(wordGroupsDict) {
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
       var messageBody = wordGroupsDict;
+
       console.log(wordGroupsDict);
       chrome.tabs.sendMessage(tabs[0].id, messageBody, function(response) {
         // console.log(response.content);

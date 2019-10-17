@@ -11,7 +11,11 @@
   })();
 
   // highlight word in DOM (textnode only)
-  var highlightWordInTextNodeOnly = function(word, bgColorCode) {
+  var highlightWordInTextNodeOnly = function(
+    word,
+    bgColorCode,
+    wordsDescription
+  ) {
     // skip empty word
     if (word == null || word.length === 0) return;
 
@@ -62,12 +66,12 @@
 
       // highlight all ranges
       rangeList.forEach(function(r) {
-        highlightRange(r, bgColorCode);
+        highlightRange(r, bgColorCode, wordsDescription);
       });
     });
   };
   // highlight word in DOM (keyword can be across multi tag)
-  var highlightWordAcrossNode = function(word, bgColorCode) {
+  var highlightWordAcrossNode = function(word, bgColorCode, wordsDescription) {
     // reset cursor
     window.getSelection().removeAllRanges();
 
@@ -85,11 +89,11 @@
 
     // highlight all ranges
     rangeList.forEach(function(r) {
-      highlightRange(r, bgColorCode);
+      highlightRange(r, bgColorCode, wordsDescription);
     });
   };
   // highlight the keyword by surround it by `i`
-  var highlightRange = function(range, bgColorCode) {
+  var highlightRange = function(range, bgColorCode, wordsDescription) {
     // create wrapping i
     var iNode = document.createElement("i");
     var selectorName = (iNode.className = "chrome-extension-highlight-".concat(
@@ -111,9 +115,9 @@
       );
       ruleExistenceDict[bgColorCode] = true;
     }
-
     // range.surroundContents(iNode) will throw exception if word across multi tag
     iNode.appendChild(range.extractContents());
+    iNode.title = `${iNode.textContent}${wordsDescription[iNode.textContent]}`;
     range.insertNode(iNode);
   };
   // highlight all keywords by its colour
@@ -128,7 +132,11 @@
     Object.keys(wordGroupsDict).forEach(function(groupName) {
       if (wordGroupsDict[groupName].isOn) {
         wordGroupsDict[groupName].words.forEach(function(word) {
-          highlightWordFunction(word, groupName);
+          highlightWordFunction(
+            word,
+            groupName,
+            wordGroupsDict[groupName].wordsDescription
+          );
         });
       }
     });
