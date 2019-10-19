@@ -3,28 +3,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>이시국에 일본외래어를 쓴다고?</title>
-    <style>
-      button {
-        position: relative;
-        height: 30px;
-        width: 30px;
-        outline: none;
-        margin: 10px;
-      }
-      h3 {
-        position: relative;
-        height: 30px;
-        width: 300px;
-        outline: none;
-        margin: 10px;
-      }
-    </style>
+    <link rel="stylesheet" href="css/popup.css" />
+    <style></style>
   </head>
   <body>
     <script type="text/javascript" src="data/word.js"></script>
     <main id="mainBlock">
-      <div>이시국에 일본외래어를?</div>
+      <div class="extension-name">이 시국에 일본 외래어?</div>
+      <div class="extension-name">
+        이 익스텐션은 일본 외래어를 무료로 보여드립니다.
+      </div>
       <section>
         <span class="toggle">
           <input type="checkbox" class="pure-toggle-checkbox" hidden />
@@ -34,10 +22,7 @@
           </label>
         </span>
         <header class="color-header">C72E04</header>
-        <textarea
-          class="highlight-words"
-          placeholder="(separated by a space)"
-        ></textarea>
+        <textarea class="highlight-words"></textarea>
       </section>
     </main>
     <script src="popup.js"></script>
