@@ -1,7 +1,14 @@
+body {
+  height: 200px;
+  background-image: url("../images/KorPaperBackground.jpeg");
+}
+
 .toggle {
   float: left;
 }
 .color-header {
+  /* visibility: hidden; */
+  display: nonoe;
   float: left;
   margin-left: 1ex;
   font-family: monospace;
@@ -45,7 +52,7 @@
   transform: translate(0px, 0px);
   -webkit-transform: translate(0px, 0px);
 
-  font-family: monospace;
+  font-family: "BMEULJIRO";
   font-size: 11pt;
   font-weight: 800;
 }
@@ -248,14 +255,43 @@ input[type="checkbox"]:checked + .pure-toggle.flip:before {
 }
 
 .extension-name {
-  font-size: 16px;
-  padding-top: 35px;
+  font-family: "BMEULJIRO";
+  font-size: 32px;
+  padding-top: 20px;
   padding-bottom: 2px;
   width: 400px;
   text-align: center;
-  margin: 0 auto;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-weight: bold;
+}
+
+.extension-content {
+  font-family: "BMEULJIRO";
+  font-size: 16px;
+  padding-top: 35px;
+  padding-bottom: 40px;
+  width: 400px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "BMEULJIRO";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BMEULJIRO.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.event-ui {
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  width: 100px;
 }
