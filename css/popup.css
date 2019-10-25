@@ -1,7 +1,14 @@
+body {
+  height: 200px;
+  background-image: url("../images/KorPaperBackground.jpeg");
+}
+
 .toggle {
   float: left;
 }
 .color-header {
+  /* visibility: hidden; */
+  display: nonoe;
   float: left;
   margin-left: 1ex;
   font-family: monospace;
@@ -18,24 +25,6 @@
 .button-block {
   margin-bottom: 1em;
 }
-#new-group-color,
-#add-button {
-  outline: none;
-}
-#new-group-color {
-  height: 100%;
-}
-#new-group-color:invalid {
-  border: 1px solid red;
-}
-#add-button {
-  color: #f7ac6f;
-  background-color: #fce6e6;
-}
-#add-button:hover {
-  color: #fce6e6;
-  background-color: #f7ac6f;
-}
 
 .button {
   border: none;
@@ -45,7 +34,7 @@
   transform: translate(0px, 0px);
   -webkit-transform: translate(0px, 0px);
 
-  font-family: monospace;
+  font-family: "BMEULJIRO";
   font-size: 11pt;
   font-weight: 800;
 }
@@ -56,17 +45,6 @@
 .button:active {
   transform: translate(5px, 5px);
   -webkit-transform: translate(5px, 5px);
-}
-
-.remove-group-button {
-  color: #404040;
-  background-color: #ff2600;
-
-  float: right;
-}
-.remove-group-button:hover {
-  color: #ff2600;
-  background-color: #404040;
 }
 
 .pure-toggle {
@@ -105,20 +83,20 @@ input[type="checkbox"] + .pure-toggle:before {
   -ms-transform: rotateY(0deg);
   -webkit-transform: rotateY(0deg);
   transform: rotateY(0deg);
-  background-color: #cc0966;
+  background-color: #baa122;
 }
 input[type="checkbox"] + .pure-toggle [class^="fontawesome-"] {
-  color: #cc0966;
+  color: #baa122;
 }
 input[type="checkbox"]:checked + .pure-toggle:before {
   -moz-transform: rotateY(-180deg);
   -ms-transform: rotateY(-180deg);
   -webkit-transform: rotateY(-180deg);
   transform: rotateY(-180deg);
-  background-color: #5eb9cc;
+  background-color: #1390a9;
 }
 input[type="checkbox"]:checked + .pure-toggle [class^="fontawesome-"] {
-  color: #5eb9cc;
+  color: #1390a9;
 }
 
 .pure-toggle:before {
@@ -248,14 +226,42 @@ input[type="checkbox"]:checked + .pure-toggle.flip:before {
 }
 
 .extension-name {
-  font-size: 16px;
-  padding-top: 35px;
+  font-family: "BMEULJIRO";
+  font-size: 32px;
+  padding-top: 20px;
   padding-bottom: 2px;
   width: 400px;
   text-align: center;
-  margin: 0 auto;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-weight: bold;
+}
+
+.extension-content {
+  font-family: "BMEULJIRO";
+  font-size: 16px;
+  padding-top: 35px;
+  padding-bottom: 40px;
+  width: 400px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@font-face {
+  font-family: "BMEULJIRO";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BMEULJIRO.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.event-ui {
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  width: 100px;
 }

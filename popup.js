@@ -125,7 +125,7 @@
     // use default for 1st time
     var colorGroups = Object.keys(wordGroupsDict);
     if (colorGroups.length === 0) {
-      colorGroups = ["27AB99"].slice(0);
+      colorGroups = ["CCB509"].slice(0);
       colorGroups.forEach(colorGroup =>
         createNewGroupInDict(wordGroupsDict, colorGroup)
       );
